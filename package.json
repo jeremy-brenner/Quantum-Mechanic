@@ -2,9 +2,9 @@
   "name": "quantum-mechanic",
   "version": "1.0.0",
   "description": "Quantum Mechanic game for St. Louis Game Jam 2017￼Edit",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-copy": "^1.0.0",
     "gulp-watch": "^4.3.11"
+  },
+  "devDependencies": {
+    "electron": "^1.4.15"
   }
 }
