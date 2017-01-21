@@ -6,7 +6,7 @@ var copy = require('gulp-copy');
 
 gulp.task('default', ['compile']);
 
-gulp.task('compile', ['html','babel','img','lib' ] );
+gulp.task('compile', ['html','babel','img','lib', 'maps' ] );
 
 gulp.task('html',function(){
   gulp.src('src/index.html')
@@ -32,15 +32,16 @@ gulp.task('lib',function(){
     .pipe(copy('app/lib/',{prefix:2}));
 });
 
+gulp.task('maps',function(){
+  gulp.src('src/maps/**/*')
+    .pipe(copy('app/maps/',{prefix:2}));
+});
 
-gulp.task('watch', function () {
-  gulp.watch('src/index.html', function() {
-    gulp.run('html');
-  });
-  gulp.watch('src/js/**/*.js', function() {
-    gulp.run('babel');
-  });
-  gulp.watch('src/img/**/*', function() {
-    gulp.run('img');
-  });
+gulp.task('watch', ['compile', 'startwatch']);
+
+gulp.task('startwatch', function () {
+  gulp.watch('src/index.html', ['html']);
+  gulp.watch('src/js/**/*.js', ['babel']);
+  gulp.watch('src/img/**/*', ['img']);
+  gulp.watch('src/maps/**/*', ['maps']);
 });
