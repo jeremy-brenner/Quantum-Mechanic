@@ -1,10 +1,19 @@
 class MapLoader {
-  constructor() {
-    console.log('MapLoader loaded');
+  constructor(filename) {
+    this.filename = filename;
+    this._ready = false;
+    this.object = null;
+    this.onload = null;
   }
 
-  load(lvl) {
-    const data = require('electron').remote.require(`./app/maps/${lvl}.json`);
-    return new Map(data);
+  load() {
+    const data = require('electron').remote.require(this.filename);
+    this.object = new Map(data);
+    this._ready = true;
+    this.onload();
+  }
+
+  ready() {
+    return this._ready;
   }
 }

@@ -13,7 +13,6 @@ class Renderer {
     this.scene.add(this.ambient);
 
     document.body.appendChild( this.renderer.domElement );
-    this.render();
     window.addEventListener( 'resize', this.windowResize.bind(this) );
     console.log('Renderer loaded');
   }
@@ -26,6 +25,10 @@ class Renderer {
     this.camera.bottom = window.innerHeight / - 2;
     this.camera.updateProjectionMatrix();
     console.log("window resized");
+  }
+
+  start() {
+    this.render();
   }
 
   render() {

@@ -1,4 +1,4 @@
-class AudioLoader {
+class ImageLoader {
   constructor(filename) {
     this.filename = filename;
     this._ready = false;
@@ -27,4 +27,5 @@ class AudioLoader {
   ready() {
     return this._ready;
   }
+
 }
