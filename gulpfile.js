@@ -6,7 +6,7 @@ var copy = require('gulp-copy');
 
 gulp.task('default', ['compile']);
 
-gulp.task('compile', ['html','babel','img','lib', 'maps' ] );
+gulp.task('compile', ['html','babel','img','lib', 'maps', 'audio' ] );
 
 gulp.task('html',function(){
   gulp.src('src/index.html')
@@ -37,6 +37,12 @@ gulp.task('maps',function(){
     .pipe(copy('app/maps/',{prefix:2}));
 });
 
+gulp.task('audio',function(){
+  gulp.src('src/audio/**/*')
+    .pipe(copy('app/audio/',{prefix:2}));
+});
+
+
 gulp.task('watch', ['compile', 'startwatch']);
 
 gulp.task('startwatch', function () {
@@ -44,4 +50,5 @@ gulp.task('startwatch', function () {
   gulp.watch('src/js/**/*.js', ['babel']);
   gulp.watch('src/img/**/*', ['img']);
   gulp.watch('src/maps/**/*', ['maps']);
+  gulp.watch('src/audio/**/*', ['audio']);
 });

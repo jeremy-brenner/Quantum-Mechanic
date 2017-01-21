@@ -1,4 +1,5 @@
 class Map {
-  constructor() {
+  constructor(data) {
+    this.data = data;
   }
 }
