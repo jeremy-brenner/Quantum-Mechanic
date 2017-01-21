@@ -2,11 +2,11 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var copy = require('gulp-copy');
-var watch = require('gulp-watch');
+//var watch = require('gulp-watch');
 
 gulp.task('default', ['compile']);
 
-gulp.task('compile', ['html','babel','img' ] );
+gulp.task('compile', ['html','babel','img','lib' ] );
 
 gulp.task('html',function(){
   gulp.src('src/index.html')
@@ -27,14 +27,20 @@ gulp.task('img',function(){
     .pipe(copy('app/img/',{prefix:2}));
 });
 
+gulp.task('lib',function(){
+  gulp.src('src/lib/**/*')
+    .pipe(copy('app/lib/',{prefix:2}));
+});
+
+
 gulp.task('watch', function () {
   gulp.watch('src/index.html', function() {
-      gulp.run('html');
+    gulp.run('html');
   });
   gulp.watch('src/js/**/*.js', function() {
-      gulp.run('babel');
+    gulp.run('babel');
   });
   gulp.watch('src/img/**/*', function() {
-      gulp.run('img');
+    gulp.run('img');
   });
 });
