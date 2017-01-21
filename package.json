@@ -1,0 +1,19 @@
+{
+  "name": "quantum-mechanic",
+  "version": "1.0.0",
+  "description": "Quantum Mechanic game for St. Louis Game Jam 2017￼Edit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeremy-brenner/Quantum-Mechanic.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeremy-brenner/Quantum-Mechanic/issues"
+  },
+  "homepage": "https://github.com/jeremy-brenner/Quantum-Mechanic#readme"
+}
