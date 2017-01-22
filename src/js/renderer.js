@@ -28,6 +28,15 @@ class Renderer {
   }
 
   start() {
+    var map = window.game.maps.get('hub');
+    var map_group = map.buildThreeGroup();
+    map_group.scale.x = 40;
+    map_group.scale.y = 40;
+    map_group.position.x = -200;
+    map.group.position.y = 200;
+    console.log(map_group, map_group.children);
+    this.scene.add( map_group );
+
     this.render();
   }
 

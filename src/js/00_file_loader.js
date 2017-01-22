@@ -8,7 +8,7 @@ class FileLoader {
 
   name() {
     var pieces = this.filename.split('.');
-    return pieces[0].split('/').pop();
+    return pieces[1].split('/').pop();
   }
 
   load() {
@@ -29,4 +29,14 @@ class FileLoader {
     this.ready = true;
     this.onload();
   }
+  
+  toArrayBuffer(buf) {
+      var ab = new ArrayBuffer(buf.length);
+      var view = new Uint8Array(ab);
+      for (var i = 0; i < buf.length; ++i) {
+          view[i] = buf[i];
+      }
+      return ab;
+  }
+
 }

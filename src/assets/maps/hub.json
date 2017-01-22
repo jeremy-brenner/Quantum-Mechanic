@@ -5,7 +5,15 @@
   "tiles": [
     {
       "x": 0,
-      "y": 4
+      "y": 0
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "type": "door",
+      "door_id": "door0",
+      "connected_to": ["switch0"],
+      "room": "a0r0"
     },
     {
       "x": 1,
@@ -41,11 +49,15 @@
     },
     {
       "x": 3,
-      "y": 0
+      "y": 0,
+      "type": "switch",
+      "switch_id": "switch0",
+      "connects_to": "door0"
     },
     {
       "x": 3,
-      "y": 1
+      "y": 1,
+      "type": "glass"
     },
     {
       "x": 3,
@@ -89,11 +101,15 @@
     },
     {
       "x": 5,
-      "y": 0
+      "y": 0,
+      "type": "switch",
+      "switch_id": "switch1",
+      "connects_to": "door1"
     },
     {
       "x": 5,
-      "y": 1
+      "y": 1,
+      "type": "aluminum"
     },
     {
       "x": 5,
@@ -117,7 +133,11 @@
     },
     {
       "x": 5,
-      "y": 7
+      "y": 7,
+      "type": "door",
+      "door_id": "door1",
+      "connected_to": ["switch1"],
+      "room": "a1r0"
     },
     {
       "x": 6,
@@ -141,11 +161,15 @@
     },
     {
       "x": 7,
-      "y": 0
+      "y": 0,
+      "type": "switch",
+      "switch_id": "switch2",
+      "connects_to": "door2"
     },
     {
       "x": 7,
-      "y": 1
+      "y": 1,
+      "type": "lead"
     },
     {
       "x": 7,
@@ -177,7 +201,11 @@
     },
     {
       "x": 8,
-      "y": 4
+      "y": 4,
+      "type": "door",
+      "door_id": "door2",
+      "connected_to": ["switch2"],
+      "room": "a2r0"
     },
     {
       "x": 8,
@@ -203,16 +231,5 @@
       "x": 10,
       "y": 4
     }
-  ],
-  "data": [
-    {"x": 3, "y": 0, "type": "switch", "switch_id": "switch0", "connects_to": "door0"},
-    {"x": 5, "y": 0, "type": "switch", "switch_id": "switch1", "connects_to": "door1"},
-    {"x": 7, "y": 0, "type": "switch", "switch_id": "switch2", "connects_to": "door2"},
-    {"x": 3, "y": 1, "type": "glass"},
-    {"x": 5, "y": 1, "type": "aluminum"},
-    {"x": 7, "y": 1, "type": "lead"},
-    {"x": 0, "y": 4, "type": "door", "door_id": "door0", "connected_to": ["switch0"], "room": "a0r0"},
-    {"x": 5, "y": 7, "type": "door", "door_id": "door1", "connected_to": ["switch1"], "room": "a1r0"},
-    {"x": 8, "y": 4, "type": "door", "door_id": "door2", "connected_to": ["switch2"], "room": "a2r0"}
   ]
 }
