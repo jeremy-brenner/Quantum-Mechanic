@@ -11,6 +11,7 @@
       "x": 0,
       "y": 4,
       "type": "door",
+      "facing": "left",
       "door_id": "door0",
       "connected_to": ["switch0"],
       "room": "a0r0"
@@ -135,6 +136,7 @@
       "x": 5,
       "y": 7,
       "type": "door",
+      "facing": "down",
       "door_id": "door1",
       "connected_to": ["switch1"],
       "room": "a1r0"
@@ -201,11 +203,7 @@
     },
     {
       "x": 8,
-      "y": 4,
-      "type": "door",
-      "door_id": "door2",
-      "connected_to": ["switch2"],
-      "room": "a2r0"
+      "y": 4
     },
     {
       "x": 8,
@@ -229,7 +227,12 @@
     },
     {
       "x": 10,
-      "y": 4
+      "y": 4,
+      "type": "door",
+      "facing": "right",
+      "door_id": "door2",
+      "connected_to": ["switch2"],
+      "room": "a2r0"
     }
   ]
 }

@@ -13,13 +13,19 @@ class Tile {
     return (this.data.z)? this.data.z: 0;
   }
   texture() {
-    return window.game.textures.get(this.data.type);
+    let texture_name = this.data.type;
+
+    if (this.data.facing) {
+      texture_name += '-' + this.data.facing;
+    }
+
+    return window.game.textures.get(texture_name);
   }
   buildThreeMesh() {
     var geometry = new THREE.PlaneBufferGeometry( 1, 1, 1, 1 );
     var texture = this.texture();
 
-    var material = new THREE.MeshLambertMaterial( { map: texture } );
+    var material = new THREE.MeshLambertMaterial( { map: texture, transparent: true } );
     this.mesh = new THREE.Mesh( geometry, material );
     this.mesh.position.x = this.x()+0.5;
     this.mesh.position.y = -(this.y()+0.5);
