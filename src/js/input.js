@@ -64,6 +64,7 @@ class Input {
   }
 
   checkGamePads() {
+    this.gamepads = navigator.getGamepads();
     Object.keys(this.gamepad_bindings).forEach( (key) => {
       var button = this.gamepads[0].buttons[parseInt(key)];
       this.inputs[this.gamepad_bindings[key]] = (button) ? button.pressed: false;
