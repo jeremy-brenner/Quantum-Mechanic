@@ -27,23 +27,10 @@ class Player {
     this.mesh.position.z = 1;
     return this.mesh;
   }
-  move(direction) {
-    if (window.game.current_map.canMove(direction)) {
+  move(dx, dy) {
+    if (window.game.current_map.canMove(dx, dy)) {
       var position = {x: this.mesh.position.x, y: this.mesh.position.y};
-      switch (direction) {
-        case "up":
-          var target = {x: this.mesh.position.x, y: this.mesh.position.y + 1}
-          break;
-        case "down":
-          var target = {x: this.mesh.position.x, y: this.mesh.position.y - 1}
-          break;
-        case "left":
-          var target = {x: this.mesh.position.x - 1, y: this.mesh.position.y}
-          break;
-        case "right":
-          var target = {x: this.mesh.position.x + 1, y: this.mesh.position.y}
-          break;
-      }
+      var target = {x: position.x + dx, y: position.y + dy};
 
       var tween = new TWEEN.Tween(position).to(target, 75);
       tween.onUpdate(function(){
