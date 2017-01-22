@@ -2,6 +2,7 @@ class Tile {
   constructor(data,map) {
     this.data = data;
     this.map = map;
+    this.triggers = {};
   }
   x() {
     return this.data.x;
@@ -11,6 +12,12 @@ class Tile {
   }
   z() {
     return (this.data.z)? this.data.z: 0;
+  }
+  trigger(switch_id) {
+    this.open = true;
+    this.data.type = "door-open";
+    this.mesh.material.map = this.texture();
+    this.mesh.material.needsUpdate = true;
   }
   texture() {
     let texture_name = this.data.type;
@@ -51,6 +58,11 @@ class Tile {
       }
     } else {
       return [true, dx, dy];
+    }
+  }
+  hit() {
+    if (this.data.type == "switch") {
+      window.game.current_map.doors[this.data.connects_to].trigger(this.data.switch_id);
     }
   }
 }

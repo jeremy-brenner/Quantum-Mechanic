@@ -1,6 +1,8 @@
 class Map {
   constructor(data) {
     this.tiles = [];
+    this.switches = {};
+    this.doors = {};
     this.loadData(data);
   }
   loadData(data) {
@@ -9,7 +11,13 @@ class Map {
     this.player = new Player(data.spawn_point.x,data.spawn_point.y);
   }
   makeTile(tile) {
-    this.tiles.push( new Tile(tile) );
+    let tile_obj = new Tile(tile);
+    if (tile_obj.data.type == "switch") {
+      this.switches[tile.switch_id] = tile_obj;
+    } else if (tile_obj.data.type == "door") {
+      this.doors[tile.door_id] = tile_obj;
+    }
+    this.tiles.push( tile_obj );
   }
   getTile(x,y) {
     return this.tiles.find( (tile) => { return tile.x() == x && tile.y() == y } );
