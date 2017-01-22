@@ -37,6 +37,6 @@ class AssetLoader {
     return this.loaders.length;
   }
   loaderReadyCount() {
-    return this.loaders.filter( (loader) => { return loader.ready() } ).length;
+    return this.loaders.filter( (loader) => { return loader.ready } ).length;
   }
 }

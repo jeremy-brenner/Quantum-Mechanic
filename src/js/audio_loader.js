@@ -1,18 +1,12 @@
-class AudioLoader {
-  constructor(filename) {
-    this.filename = filename;
-    this._ready = false;
-    this.fs = require('electron').remote.require('fs');
-    this.object = null;
-    this.onload = null;
+class AudioLoader extends FileLoader {
+  gotFile(err,data) {
+    var buffer = this.toArrayBuffer(data);
+    window.game.audio.context.decodeAudioData(buffer,this.doneDecoding.bind(this));
   }
 
-  load() {
-    /*
-    var file = this.fs.readFileSync(`./app/audio/${name}.ogg`);
-    var ab = this.toArrayBuffer(file);
-    return ab;
-    */
+  doneDecoding(data) {
+    window.game.audio.add(this.name(),data);
+    this.done();
   }
 
   toArrayBuffer(buf) {
@@ -24,7 +18,4 @@ class AudioLoader {
       return ab;
   }
 
-  ready() {
-    return this._ready;
-  }
 }
