@@ -1,5 +1,6 @@
 class Renderer {
   constructor() {
+    this.running = false;
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 1000 );
 
@@ -30,18 +31,18 @@ class Renderer {
   start() {
     var map = window.game.maps.get('hub');
     var map_group = map.buildThreeGroup();
-    map_group.scale.x = 40;
-    map_group.scale.y = 40;
+    map_group.scale.x = 50;
+    map_group.scale.y = 50;
     map_group.position.x = -200;
     map.group.position.y = 200;
-    console.log(map_group, map_group.children);
     this.scene.add( map_group );
-
-    this.render();
+    this.running = true;
   }
 
   render() {
-    requestAnimationFrame( this.render.bind(this) );
+    if(!this.running) {
+      return;
+    }
     this.renderer.render(this.scene, this.camera);
   }
 

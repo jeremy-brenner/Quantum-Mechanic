@@ -9,6 +9,7 @@ class Game {
     this.asset_loader.onLoad = this.allAssetsLoaded.bind(this);
     this.asset_loader.onChange = this.assetLoaded.bind(this);
     this.asset_loader.load();
+    this.gameLoop();
   }
 
   assetLoaded(perc) {
@@ -18,5 +19,14 @@ class Game {
   allAssetsLoaded() {
     console.log("all assets loaded");
     this.renderer.start();
+  }
+
+  gameLoop() {
+    requestAnimationFrame( this.gameLoop.bind(this) );
+  //  var keys = this.input.getKeys();
+  //  if(keys.length>0){
+//      console.log(keys);
+//    }
+    this.renderer.render();
   }
 }
