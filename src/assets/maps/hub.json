@@ -5,7 +5,8 @@
   "tiles": [
     {
       "x": 0,
-      "y": 0
+      "y": 0,
+      "type": "shiny_front"
     },
     {
       "x": 0,

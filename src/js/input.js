@@ -34,6 +34,7 @@ class Input {
   getKeys() {
     var fire_time = Date.now() - this.fire_rate;
     var pressed_keys = this.keys.filter( (key) => { return key.pressed &&  key.last_fired < fire_time } );
-
+    pressed_keys.forEach( (key) => { key.last_fired = Date.now() } );
+    return pressed_keys;
   }
 }

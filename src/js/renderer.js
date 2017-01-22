@@ -31,8 +31,8 @@ class Renderer {
   start() {
     var map = window.game.maps.get('hub');
     var map_group = map.buildThreeGroup();
-    map_group.scale.x = 50;
-    map_group.scale.y = 50;
+    map_group.scale.x = 100;
+    map_group.scale.y = 100;
     map_group.position.x = -200;
     map.group.position.y = 200;
     this.scene.add( map_group );

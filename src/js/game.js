@@ -26,10 +26,10 @@ class Game {
 
   gameLoop() {
     requestAnimationFrame( this.gameLoop.bind(this) );
-  //  var keys = this.input.getKeys();
-  //  if(keys.length>0){
-//      console.log(keys);
-//    }
+    var keys = this.input.getKeys();
+    if(keys.length>0){
+      console.log(keys);
+    }
     this.renderer.render();
   }
 }
