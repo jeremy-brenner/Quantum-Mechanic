@@ -64,7 +64,10 @@ class Input {
   }
 
   checkGamePads() {
-    Object.keys(this.gamepad_bindings).forEach( (key) => { this.inputs[this.gamepad_bindings[key]] = this.gamepads[0].buttons[key].pressed } );
+    Object.keys(this.gamepad_bindings).forEach( (key) => {
+      var button = this.gamepads[0].buttons[parseInt(key)];
+      this.inputs[this.gamepad_bindings[key]] = (button) ? button.pressed: false;
+    } );
   }
 
   addGamePad(e) {
