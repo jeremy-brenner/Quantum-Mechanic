@@ -8,10 +8,12 @@ class Game {
     this.textures = new Textures();
     this.background = new Background(100,100);
     this.asset_loader = new AssetLoader();
+    this.beam = new Beam();
     this.asset_loader.onLoad = this.allAssetsLoaded.bind(this);
     this.asset_loader.onChange = this.assetLoaded.bind(this);
     this.asset_loader.load();
     this.current_map = null;
+    this.player = null;
     this.ready = false;
     this.gameLoop();
   }
@@ -31,26 +33,38 @@ class Game {
     this.ready = true;
   }
 
-  gameLoop() {
+  fireBeam() {
+    var x = this.current_map.player.x();
+    var y = -1*(this.current_map.player.y());
+    var beam = new Beam(0,x,y,this.current_map.player.dx(),this.current_map.player.dy());
+    console.log(beam);
+  }
+
+  gameLoop(timestamp) {
     requestAnimationFrame( this.gameLoop.bind(this) );
     if( this.ready ){
       var inputs = this.input.getInputs();
-      if(!this.current_map&&inputs.Action1){
-        this.loadMap('hub');
-      }
+
       if(this.current_map){
         if(inputs.Left) {
-          this.current_map.player.move(-1,0);
+          this.player.move('Left');
         }
         if(inputs.Right) {
-          this.current_map.player.move(1,0);
+          this.player.move('Right');
         }
         if(inputs.Up) {
-          this.current_map.player.move(0,1);
+          this.player.move('Up');
         }
         if(inputs.Down) {
-          this.current_map.player.move(0,-1);
+          this.player.move('Down');
         }
+        if(inputs.Action1) {
+          this.fireBeam();
+        }
+        this.player.tick(timestamp);
+      }
+      if(!this.current_map&&inputs.Action1){
+        this.loadMap('hub');
       }
       TWEEN.update();
       this.renderer.render();
@@ -62,5 +76,6 @@ class Game {
     map_group.scale.x = 100;
     map_group.scale.y = 100;
     this.renderer.scene.add( map_group );
+    this.player = this.current_map.player;
   }
 }
