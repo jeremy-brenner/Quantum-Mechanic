@@ -38,4 +38,19 @@ class Tile {
     }
     return false
   }
+  passes(type, dx, dy) {
+    if (this.data.type) {
+      if (this.data.type == "mirror") {
+        if (this.data.accepts_from.dx == (-1)*dx) {
+          return [true, 0, this.data.accepts_from.dy]
+        } else if (this.data.accepts_from.dy == (-1)*dy) {
+          return [true, this.data.accepts_from.dx, 0]
+        }
+      } else {
+        return [false, 0, 0]
+      }
+    } else {
+      return [true, dx, dy];
+    }
+  }
 }

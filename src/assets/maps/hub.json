@@ -191,7 +191,13 @@
     },
     {
       "x": 7,
-      "y": 6
+      "y": 6,
+      "type": "mirror",
+      "facing": "up",
+      "accepts_from": {
+        "dx": -1,
+        "dy": -1
+      }
     },
     {
       "x": 8,
