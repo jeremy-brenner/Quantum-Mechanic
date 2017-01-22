@@ -24,6 +24,8 @@ class Renderer {
     this.camera.right =  window.innerWidth / 2;
     this.camera.top = window.innerHeight / 2;
     this.camera.bottom = window.innerHeight / - 2;
+    this.camera.position.x = window.innerWidth / 2;
+    this.camera.position.y = window.innerHeight / - 2;
     this.camera.updateProjectionMatrix();
     console.log("window resized");
   }
@@ -33,8 +35,6 @@ class Renderer {
     var map_group = map.buildThreeGroup();
     map_group.scale.x = 100;
     map_group.scale.y = 100;
-    map_group.position.x = -200;
-    map.group.position.y = 200;
     this.scene.add( map_group );
     this.running = true;
   }
