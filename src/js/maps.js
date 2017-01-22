@@ -3,7 +3,6 @@ class Maps {
     this.maps = {};
   }
   add(name,map) {
-    console.log('adding',name,map);
     this.maps[name] = map;
   }
   get(name) {

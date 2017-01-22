@@ -5,7 +5,7 @@ class AssetLoader {
     this.fs = require('electron').remote.require('fs');
     this.loader_classes = {
       'ogg': AudioLoader,
-      'png': ImageLoader,
+      'png': TextureLoader,
       'json': MapLoader
     }
     this.loaders = [];
