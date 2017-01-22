@@ -8,7 +8,7 @@ class FileLoader {
 
   name() {
     var pieces = this.filename.split('.');
-    return pieces[0].split('/').pop();
+    return pieces[1].split('/').pop();
   }
 
   load() {
