@@ -1,6 +1,6 @@
 class Game {
   constructor() {
-    this.renderer = new Renderer();
+    this.loading_screen = new LoadingScreen();
     this.input = new Input();
     this.audio = new Audio();
     this.maps = new Maps();
@@ -12,11 +12,14 @@ class Game {
   }
 
   assetLoaded(perc) {
+    this.loading_screen.assetLoaded(perc);
     console.log(`asset loaded ${perc}% complete`);
   }
 
   allAssetsLoaded() {
+    this.loading_screen.allAssetsLoaded();
     console.log("all assets loaded");
+    this.renderer = new Renderer();
     this.renderer.start();
   }
 }
