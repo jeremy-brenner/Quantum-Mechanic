@@ -1,8 +1,7 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var concat = require('gulp-concat');
-var copy = require('gulp-copy');
-//var watch = require('gulp-watch');
+var del = require('del');
 
 gulp.task('default', ['compile']);
 
@@ -23,20 +22,13 @@ gulp.task('babel',function(){
 });
 
 gulp.task('lib',function(){
-  gulp.src('src/lib/**/*')
-    .pipe(copy('app/lib/',{prefix:2}));
+  del(['app/lib/**/*']);
+  gulp.src('src/lib/**/*', {base:'src/lib'})
+    .pipe(gulp.dest('app/lib/'));
 });
 
 gulp.task('assets',function(){
-  gulp.src('src/assets/**/*')
-    .pipe(copy('app/assets/',{prefix:2}));
-});
-
-
-gulp.task('watch', ['compile', 'startwatch']);
-
-gulp.task('startwatch', function () {
-  gulp.watch('src/index.html', ['html']);
-  gulp.watch('src/js/**/*.js', ['babel']);
-  gulp.watch('src/assets/**/*', ['assets']);
+  del(['app/assets/**/*']);
+  gulp.src('src/assets/**/*', {base:'src/assets'})
+    .pipe(gulp.dest('app/assets/'));
 });

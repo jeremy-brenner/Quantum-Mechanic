@@ -6,6 +6,7 @@ class Map {
   loadData(data) {
     this.title = data.title;
     data.tiles.forEach(this.makeTile.bind(this));
+    this.player = new Player(data.spawn_point.x,data.spawn_point.y);
   }
   makeTile(tile) {
     this.tiles.push( new Tile(tile) );
@@ -15,6 +16,7 @@ class Map {
   }
   buildThreeGroup() {
     this.group = new THREE.Group();
+    this.group.add(this.player.buildThreeMesh())
     this.tiles.forEach( (tile) => { this.group.add(tile.buildThreeMesh()) } );
     return this.group;
   }
