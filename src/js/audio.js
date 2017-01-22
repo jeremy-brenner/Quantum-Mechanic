@@ -3,7 +3,7 @@ class Audio {
     this.context = new AudioContext();
     this.sources = {};
   }
-  addSource(name,data) {
+  add(name,data) {
     var source = this.context.createBufferSource();
     source.buffer = data;
     source.connect(this.context.destination);

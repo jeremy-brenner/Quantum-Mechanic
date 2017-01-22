@@ -5,7 +5,7 @@ class AudioLoader extends FileLoader {
   }
 
   doneDecoding(data) {
-    window.game.audio.addSource(this.name(),data);
+    window.game.audio.add(this.name(),data);
     this.done();
   }
 
