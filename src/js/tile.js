@@ -9,6 +9,9 @@ class Tile {
   y() {
     return this.data.y;
   }
+  z() {
+    return (this.data.z)? this.data.z: 0;
+  }
   texture() {
     return window.game.textures.get(this.data.type);
   }
@@ -20,6 +23,7 @@ class Tile {
     this.mesh = new THREE.Mesh( geometry, material );
     this.mesh.position.x = this.x()+0.5;
     this.mesh.position.y = -(this.y()+0.5);
+    this.mesh.position.z = this.z();
     return this.mesh;
   }
 }

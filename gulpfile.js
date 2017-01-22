@@ -5,11 +5,12 @@ var del = require('del');
 
 gulp.task('default', ['compile']);
 
+gulp.task('clean', ['clean:lib', 'clean:assets']);
 gulp.task('compile', ['html','babel','lib', 'assets' ] );
 
 gulp.task('html',function(){
   gulp.src('src/index.html')
-    .pipe(copy('app/',{prefix:2}));
+    .pipe(gulp.dest('app/'));
 });
 
 gulp.task('babel',function(){
@@ -21,14 +22,20 @@ gulp.task('babel',function(){
     .pipe(gulp.dest('app/js/'));
 });
 
-gulp.task('lib',function(){
+gulp.task('clean:lib',function(){
   del(['app/lib/**/*']);
+});
+
+gulp.task('clean:assets',function(){
+  del(['app/assets/**/*']);
+});
+
+gulp.task('lib',function(){
   gulp.src('src/lib/**/*', {base:'src/lib'})
     .pipe(gulp.dest('app/lib/'));
 });
 
 gulp.task('assets',function(){
-  del(['app/assets/**/*']);
   gulp.src('src/assets/**/*', {base:'src/assets'})
     .pipe(gulp.dest('app/assets/'));
 });

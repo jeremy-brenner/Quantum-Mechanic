@@ -13,7 +13,12 @@ class Input {
       'KeyK': 'Action2'
     };
     this.gamepad_bindings = {
-
+      '12': 'Up',
+      '14': 'Left',
+      '13': 'Down',
+      '15': 'Right',
+      '0': 'Action1',
+      '1': 'Action2'
     };
     this.inputs = {
       'Up': false,
@@ -48,7 +53,18 @@ class Input {
   }
 
   getInputs() {
+    if( this.gamePadPresent() ){
+      this.checkGamePads();
+    }
     return this.inputs;
+  }
+
+  gamePadPresent() {
+    return this.gamepads.length > 0;
+  }
+
+  checkGamePads() {
+    Object.keys(this.gamepad_bindings).forEach( (key) => { this.inputs[this.gamepad_bindings[key]] = this.gamepads[0].buttons[key].pressed } );
   }
 
   addGamePad(e) {

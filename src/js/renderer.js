@@ -1,6 +1,6 @@
 class Renderer {
   constructor() {
-    this.running = false;
+
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0, 1000 );
 
@@ -30,19 +30,7 @@ class Renderer {
     console.log("window resized");
   }
 
-  start() {
-    var map = window.game.maps.get('hub');
-    var map_group = map.buildThreeGroup();
-    map_group.scale.x = 100;
-    map_group.scale.y = 100;
-    this.scene.add( map_group );
-    this.running = true;
-  }
-
   render() {
-    if(!this.running) {
-      return;
-    }
     this.renderer.render(this.scene, this.camera);
   }
 

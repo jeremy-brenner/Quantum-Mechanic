@@ -6,10 +6,13 @@ class Game {
     this.audio = new Audio();
     this.maps = new Maps();
     this.textures = new Textures();
+    this.background = new Background(100,100);
     this.asset_loader = new AssetLoader();
     this.asset_loader.onLoad = this.allAssetsLoaded.bind(this);
     this.asset_loader.onChange = this.assetLoaded.bind(this);
     this.asset_loader.load();
+    this.current_map = null;
+    this.ready = false;
     this.gameLoop();
   }
 
@@ -21,7 +24,12 @@ class Game {
   allAssetsLoaded() {
     this.loading_screen.allAssetsLoaded();
     console.log("all assets loaded");
-    this.renderer.start();
+    var background_group = this.background.buildThreeGroup();
+    background_group.scale.x = 100;
+    background_group.scale.y = 100;
+    this.renderer.scene.add( background_group );
+    this.ready = true;
+    window.setInterval(this.checkPad.bind(this),1000);
   }
 
   gameLoop() {
@@ -30,6 +38,19 @@ class Game {
   //  if(keys.length>0){
   //    console.log(keys);
   //  }
-    this.renderer.render();
+    if( this.ready ){
+      var inputs = this.input.getInputs();
+      if(!this.current_map&&inputs.Action1==true){
+        this.loadMap('hub');
+      }
+      this.renderer.render();
+    }
+  }
+  loadMap(map_name) {
+    this.current_map = window.game.maps.get(map_name);
+    var map_group = this.current_map.buildThreeGroup();
+    map_group.scale.x = 100;
+    map_group.scale.y = 100;
+    this.renderer.scene.add( map_group );
   }
 }
