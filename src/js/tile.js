@@ -32,4 +32,10 @@ class Tile {
     this.mesh.position.z = this.z();
     return this.mesh;
   }
+  solid() {
+    if (this.data.type) {
+      return true;
+    }
+    return false
+  }
 }

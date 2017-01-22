@@ -38,6 +38,7 @@ class Game {
       if(!this.current_map&&inputs.Action1==true){
         this.loadMap('hub');
       }
+      TWEEN.update();
       this.renderer.render();
     }
   }
