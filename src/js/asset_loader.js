@@ -27,8 +27,10 @@ class AssetLoader {
     this.loaders.push(loader);
   }
   loaderLoaded() {
-    console.log('loader loaded');
-    console.log('ready',this.percentReady() );
+    this.onChange( this.percentReady() );
+    if( this.percentReady() == 100 ) {
+      this.onLoad();
+    }
   }
   percentReady() {
     return Math.floor(this.loaderReadyCount() / this.loaderCount() * 100);
@@ -38,5 +40,11 @@ class AssetLoader {
   }
   loaderReadyCount() {
     return this.loaders.filter( (loader) => { return loader.ready } ).length;
+  }
+  onLoad() {
+
+  }
+  onChange() {
+
   }
 }

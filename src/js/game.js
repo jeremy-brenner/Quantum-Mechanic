@@ -6,11 +6,17 @@ class Game {
     this.maps = new Maps();
     this.images = new Images();
     this.asset_loader = new AssetLoader();
-    this.start();
+    this.asset_loader.onLoad = this.allAssetsLoaded.bind(this);
+    this.asset_loader.onChange = this.assetLoaded.bind(this);
+    this.asset_loader.load();
   }
 
-  start() {
+  assetLoaded(perc) {
+    console.log(`asset loaded ${perc}% complete`);
+  }
+
+  allAssetsLoaded() {
+    console.log("all assets loaded");
     this.renderer.start();
-    this.asset_loader.load();
   }
 }
