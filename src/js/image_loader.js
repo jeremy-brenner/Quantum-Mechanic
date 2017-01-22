@@ -1,7 +1,7 @@
 class ImageLoader {
   constructor(filename) {
     this.filename = filename;
-    this._ready = false;
+    this.ready = false;
     this.fs = require('electron').remote.require('fs');
     this.object = null;
     this.onload = null;
@@ -24,8 +24,5 @@ class ImageLoader {
       return ab;
   }
 
-  ready() {
-    return this._ready;
-  }
 
 }

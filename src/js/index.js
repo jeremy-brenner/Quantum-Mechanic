@@ -1,4 +1,4 @@
 
 window.onload = function() {
-  new Game();
+  window.game = new Game();
 }
