@@ -29,15 +29,10 @@ class Game {
     background_group.scale.y = 100;
     this.renderer.scene.add( background_group );
     this.ready = true;
-    window.setInterval(this.checkPad.bind(this),1000);
   }
 
   gameLoop() {
     requestAnimationFrame( this.gameLoop.bind(this) );
-  //  var keys = this.input.getKeys();
-  //  if(keys.length>0){
-  //    console.log(keys);
-  //  }
     if( this.ready ){
       var inputs = this.input.getInputs();
       if(!this.current_map&&inputs.Action1==true){
