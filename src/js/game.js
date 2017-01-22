@@ -1,6 +1,7 @@
 class Game {
   constructor() {
     this.loading_screen = new LoadingScreen();
+    this.renderer = new Renderer();
     this.input = new Input();
     this.audio = new Audio();
     this.maps = new Maps();
@@ -20,7 +21,6 @@ class Game {
   allAssetsLoaded() {
     this.loading_screen.allAssetsLoaded();
     console.log("all assets loaded");
-    this.renderer = new Renderer();
     this.renderer.start();
   }
 
