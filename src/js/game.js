@@ -35,8 +35,22 @@ class Game {
     requestAnimationFrame( this.gameLoop.bind(this) );
     if( this.ready ){
       var inputs = this.input.getInputs();
-      if(!this.current_map&&inputs.Action1==true){
+      if(!this.current_map&&inputs.Action1){
         this.loadMap('hub');
+      }
+      if(this.current_map){
+        if(inputs.Left) {
+          this.current_map.player.move(-1,0);
+        }
+        if(inputs.Right) {
+          this.current_map.player.move(1,0);
+        }
+        if(inputs.Up) {
+          this.current_map.player.move(0,1);
+        }
+        if(inputs.Down) {
+          this.current_map.player.move(0,-1);
+        }
       }
       TWEEN.update();
       this.renderer.render();
