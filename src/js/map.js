@@ -24,8 +24,8 @@ class Map {
     return (tile)? tile: {boundary:true,x:x,y:y};
   }
   getAdjacentTile(x,y,direction) {
-    var new_x;
-    var new_y;
+    var new_x = x;
+    var new_y = y;
 
     switch(direction){
       case 'Left':
@@ -34,20 +34,13 @@ class Map {
       case 'Right':
         new_x = x+1;
         break;
-      default:
-        new_x = x;
+      case 'Up':
+        new_y = y+1;
+        break;
+      case 'Down':
+        new_y = y-1;
+        break;
     }
-
-    switch(direction){
-        case 'Up':
-          new_y = y-1;
-          break;
-        case 'Down':
-          new_y = y+1;
-          break;
-        default:
-          new_y = y;
-      }
     return this.getTile(new_x,new_y);
   }
   buildThreeGroup() {

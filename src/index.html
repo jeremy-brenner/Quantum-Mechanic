@@ -4,18 +4,22 @@
 		<meta charset=utf-8>
 		<title>Quantum Mechanic</title>
 		<style>
-			body { margin: 0; display: inline-block; overflow: hidden; background-image: url('./assets/img/paper-tile.png');}
+			body { margin: 0; display: inline-block; overflow: hidden; }
 			canvas { width: 100%; height: 100%; }
+			#loading-screen { width: 100vw; height: 100vh; background-image: url('./assets/img/background.png'); background-size: 6.25vw 11.11vh;}
+			#title-image { width: 60vw; height: 50vw; background-image: url('./assets/img/title.png'); background-position: center; background-repeat: no-repeat;}
 			#loading-bar-empty { width: 100vw; height: 100vh; background-image: url('./assets/img/loading-bar-empty.png'); background-position: center; background-repeat: no-repeat; background-size: 50%;}
 			#loading-bar-full-wrapper { display: block; margin-right: auto; width: 25%; height: 100vh; clip: rect(auto, auto, auto, auto); backface-visibility: hidden; position: absolute;}
 			#loading-bar-full { position: fixed; top: 49.6%; left: 50%; transform: translate(-50%, -50%);width: 50vw;}
 		</style>
 	</head>
 	<body>
-		<div id="loading-bar-full-wrapper">
-			<img src="./assets/img/loading-bar-full-1.png" id="loading-bar-full"/>
+		<div id='loading-screen'>
+		  <div id="loading-bar-full-wrapper">
+			  <img src="./assets/img/loading-bar-full-1.png" id="loading-bar-full"/>
+		  </div>
+		  <div id="loading-bar-empty"></div>
 		</div>
-		<div id="loading-bar-empty"></div>
     <script src="lib/three.min.js"></script>
 		<script src="lib/tween.min.js"></script>
     <script src="js/index.js"></script>

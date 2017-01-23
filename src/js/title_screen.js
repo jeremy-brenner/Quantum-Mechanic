@@ -3,7 +3,7 @@ class TitleScreen {
     this.group = new THREE.Group();
     this.group.position.z = 5;
     this.group.position.x = 5;
-    this.group.position.y = -5;
+    this.group.position.y = 5;
   }
   load() {
     var geometry = new THREE.PlaneBufferGeometry( 6, 5, 1, 1 );

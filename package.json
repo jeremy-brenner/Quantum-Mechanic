@@ -1,5 +1,6 @@
 {
   "name": "quantum-mechanic",
+  "productName": "Quantum Mechanic",
   "version": "1.0.0",
   "description": "Quantum Mechanic game for St. Louis Game Jam 2017￼Edit",
   "main": "main.js",

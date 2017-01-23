@@ -1,6 +1,5 @@
 class AssetLoader {
   constructor() {
-    console.log('AssetLoader loaded');
     this.asset_dir = './app/assets';
     this.fs = require('electron').remote.require('fs');
     this.loader_classes = {

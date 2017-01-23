@@ -40,8 +40,8 @@ class Tile {
 
     var material = new THREE.MeshLambertMaterial( { map: texture, transparent: true } );
     this.mesh = new THREE.Mesh( geometry, material );
-    this.mesh.position.x = this.x()+0.5;
-    this.mesh.position.y = -(this.y()+0.5);
+    this.mesh.position.x = this.x();
+    this.mesh.position.y = this.y();
     this.mesh.position.z = this.z();
     return this.mesh;
   }

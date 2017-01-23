@@ -6,7 +6,7 @@ class Game {
     this.audio = new Audio();
     this.maps = new Maps();
     this.textures = new Textures();
-    this.background = new Background(100,100);
+    this.background = new Background(16,9);
     this.asset_loader = new AssetLoader();
     this.title_screen = new TitleScreen();
     this.beam = new Beam();
@@ -17,24 +17,23 @@ class Game {
     this.player = null;
     this.ready = false;
     this.group = new THREE.Group();
-    this.group.scale.x = this.scale();
-    this.group.scale.y = this.scale();
+    this.group.position.x = 0.5;
+    this.group.position.y = 0.5;
+
     this.renderer.scene.add(this.group);
     this.gameLoop();
   }
 
   assetLoaded(perc) {
     this.loading_screen.assetLoaded(perc);
-    console.log(`asset loaded ${perc}% complete`);
   }
 
   scale() {
-    return 75;
+    return 100;
   }
 
   allAssetsLoaded() {
     this.loading_screen.allAssetsLoaded();
-    console.log("all assets loaded");
     var background_group = this.background.buildThreeGroup();
     this.group.add(background_group);
     this.group.add( this.beam.group );
@@ -55,6 +54,9 @@ class Game {
       var inputs = this.input.getInputs();
 
       if(this.current_map){
+        this.beam.tick(timestamp);
+        this.player.tick(timestamp);
+
         if(inputs.Left) {
           this.player.move('Left');
         }
@@ -70,8 +72,6 @@ class Game {
         if(inputs.Action1) {
           this.fireBeam(timestamp);
         }
-        this.beam.tick(timestamp);
-        this.player.tick(timestamp);
       }
       if(!this.current_map&&inputs.Action1){
         this.title_screen.hide();

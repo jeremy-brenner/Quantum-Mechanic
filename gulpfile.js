@@ -5,7 +5,7 @@ var del = require('del');
 
 gulp.task('default', ['compile']);
 
-gulp.task('clean', ['clean:lib', 'clean:assets']);
+gulp.task('clean', ['clean:lib', 'clean:assets', 'clean:build']);
 gulp.task('compile', ['html','babel','lib', 'assets' ] );
 
 gulp.task('html',function(){
@@ -30,6 +30,9 @@ gulp.task('clean:assets',function(){
   del(['app/assets/**/*']);
 });
 
+gulp.task('clean:build',function(){
+  del(['build/**/*']);
+});
 gulp.task('lib',function(){
   gulp.src('src/lib/**/*', {base:'src/lib'})
     .pipe(gulp.dest('app/lib/'));

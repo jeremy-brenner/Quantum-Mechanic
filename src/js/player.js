@@ -28,12 +28,6 @@ class Player {
   y() {
     return this.data.y;
   }
-  xPosition() {
-    return this.data.x+0.5;
-  }
-  yPosition() {
-    return -(this.data.y+0.5);
-  }
   currentTile() {
     return this.getTile(this.data.d,this.current_frame);
   }
@@ -63,10 +57,10 @@ class Player {
   nextY() {
     switch( this.direction() ){
       case 'Up':
-        return this.y()-1;
+        return this.y()+1;
         break;
       case 'Down':
-        return this.y()+1;
+        return this.y()-1;
         break;
       default:
         return this.y();
@@ -84,8 +78,8 @@ class Player {
   }
   buildThreeMesh() {
     ['shiny_down_a','shiny_down_b','shiny_down_standing','shiny_left_a','shiny_right_a','shiny_up_a','shiny_up_b','shiny_up_standing'].forEach( (name) => { this.makeTile(name) });
-    this.group.position.x = this.xPosition();
-    this.group.position.y = this.yPosition();
+    this.group.position.x = this.x();
+    this.group.position.y = this.y();
     this.group.position.z = 1;
     this.direction('Down');
     return this.group;
@@ -114,7 +108,7 @@ class Player {
       this.data.y = this.nextY();
 
       var position = {x: this.group.position.x, y: this.group.position.y};
-      var target = {x: this.xPosition(), y:this.yPosition()};
+      var target = {x: this.x(), y:this.y()};
 
       var tween = new TWEEN.Tween(position).to(target, this.move_time);
       tween.onUpdate(function(){
