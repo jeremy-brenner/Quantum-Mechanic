@@ -15,6 +15,10 @@ class Game {
     this.current_map = null;
     this.player = null;
     this.ready = false;
+    this.group = new THREE.Group();
+    this.group.scale.x = this.scale();
+    this.group.scale.y = this.scale();
+    this.renderer.scene.add(this.group);
     this.gameLoop();
   }
 
@@ -31,12 +35,8 @@ class Game {
     this.loading_screen.allAssetsLoaded();
     console.log("all assets loaded");
     var background_group = this.background.buildThreeGroup();
-    background_group.scale.x = this.scale();
-    background_group.scale.y = this.scale();
-    this.renderer.scene.add( background_group );
-    this.beam.group.scale.x = this.scale();
-    this.beam.group.scale.y = this.scale();
-    this.renderer.scene.add( this.beam.group );
+    this.group.add(background_group);
+    this.group.add( this.beam.group );
     this.ready = true;
   }
 
@@ -80,9 +80,7 @@ class Game {
   loadMap(map_name) {
     this.current_map = window.game.maps.get(map_name);
     var map_group = this.current_map.buildThreeGroup();
-    map_group.scale.x = this.scale();
-    map_group.scale.y = this.scale();
-    this.renderer.scene.add( map_group );
+    this.group.add( map_group );
     this.player = this.current_map.player;
   }
 }
