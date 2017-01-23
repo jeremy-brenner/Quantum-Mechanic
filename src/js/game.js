@@ -8,6 +8,7 @@ class Game {
     this.textures = new Textures();
     this.background = new Background(100,100);
     this.asset_loader = new AssetLoader();
+    this.title_screen = new TitleScreen();
     this.beam = new Beam();
     this.asset_loader.onLoad = this.allAssetsLoaded.bind(this);
     this.asset_loader.onChange = this.assetLoaded.bind(this);
@@ -37,6 +38,8 @@ class Game {
     var background_group = this.background.buildThreeGroup();
     this.group.add(background_group);
     this.group.add( this.beam.group );
+    this.group.add(this.title_screen.group);
+    this.title_screen.load();
     this.ready = true;
   }
 
