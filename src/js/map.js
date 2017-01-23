@@ -20,7 +20,35 @@ class Map {
     this.tiles.push( tile_obj );
   }
   getTile(x,y) {
-    return this.tiles.find( (tile) => { return tile.x() == x && tile.y() == y } );
+    var tile = this.tiles.find( (tile) => { return tile.x() == x && tile.y() == y } );
+    return (tile)? tile: {boundary:true,x:x,y:y};
+  }
+  getAdjacentTile(x,y,direction) {
+    var new_x;
+    var new_y;
+
+    switch(direction){
+      case 'Left':
+        new_x = x-1;
+        break;
+      case 'Right':
+        new_x = x+1;
+        break;
+      default:
+        new_x = x;
+    }
+
+    switch(direction){
+        case 'Up':
+          new_y = y-1;
+          break;
+        case 'Down':
+          new_y = y+1;
+          break;
+        default:
+          new_y = y;
+      }
+    return this.getTile(new_x,new_y);
   }
   buildThreeGroup() {
     this.group = new THREE.Group();

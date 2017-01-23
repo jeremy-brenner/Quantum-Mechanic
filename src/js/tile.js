@@ -3,6 +3,12 @@ class Tile {
     this.data = data;
     this.map = map;
     this.triggers = {};
+    this.inverse_directions = {
+      'Up': 'Down',
+      'Down': 'Up',
+      'Left': 'Right',
+      'Right': 'Left'
+    }
   }
   x() {
     return this.data.x;
@@ -23,7 +29,7 @@ class Tile {
     let texture_name = this.data.type;
 
     if (this.data.facing) {
-      texture_name += '-' + this.data.facing;
+      texture_name += '-' + this.data.facing[0].toLowerCase() + '-' + this.data.facing[1].toLowerCase();
     }
 
     return window.game.textures.get(texture_name);
@@ -45,20 +51,17 @@ class Tile {
     }
     return false
   }
-  passes(type, dx, dy) {
-    if (this.data.type) {
-      if (this.data.type == "mirror") {
-        if (this.data.accepts_from.dx == (-1)*dx) {
-          return [true, 0, this.data.accepts_from.dy]
-        } else if (this.data.accepts_from.dy == (-1)*dy) {
-          return [true, this.data.accepts_from.dx, 0]
-        }
-      } else {
-        return [false, 0, 0]
+  passes(type) {
+    return !this.data.type;
+  }
+  reflects(direction) {
+    if(this.data.type=='mirror'){
+      var i = this.data.facing.indexOf( this.inverse_directions[direction] );
+      if(i>-1){
+        return this.data.facing[(i==0)?1:0];
       }
-    } else {
-      return [true, dx, dy];
     }
+    return false;
   }
   hit() {
     if (this.data.type == "switch") {
