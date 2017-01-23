@@ -74,6 +74,7 @@ class Game {
         this.player.tick(timestamp);
       }
       if(!this.current_map&&inputs.Action1){
+        this.title_screen.hide();
         this.loadMap('hub');
       }
       TWEEN.update();

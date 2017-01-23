@@ -12,4 +12,10 @@ class TitleScreen {
     var mesh = new THREE.Mesh( geometry, material );
     this.group.add(mesh);
   }
+  show() {
+    this.group.position.z = 5;
+  }
+  hide() {
+    this.group.position.z = -5;
+  }
 }
