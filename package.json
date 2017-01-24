@@ -5,7 +5,8 @@
   "description": "Quantum Mechanic game for St. Louis Game Jam 2017￼Edit",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "gulp": "./node_modules/gulp/bin/gulp.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,7 @@
     "del": "^2.2.2",
     "electron": "^1.4.15",
     "electron-packager": "^8.5.1",
-    "gulp": "^3.9.1",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1"
   }

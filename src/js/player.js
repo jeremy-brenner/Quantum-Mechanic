@@ -1,16 +1,17 @@
 class Player {
-  constructor(x,y) {
+  constructor() {
     this.move_time = 300;
     this.frame_delay = 50;
     this.moving = false;
     this.data = {
-      x: x,
-      y: y,
+      x: -1,
+      y: -1,
       d: 'Down'
     };
     this.current_frame = 'standing';
     this.tiles = {};
     this.group = new THREE.Group();
+    this.group.visible = false;
   }
   tick(timestamp) {
     if(!this.last_frame){
@@ -22,6 +23,18 @@ class Player {
       this.last_frame = timestamp;
     }
   }
+  spawn(spawn_point) {
+    this.data.x = spawn_point.x;
+    this.data.y = spawn_point.y;
+    this.group.position.x = this.x();
+    this.group.position.y = this.y();
+    this.direction('Down');
+    this.group.visible = true;
+  }
+  despawn(){
+    this.group.visible = false;
+  }
+
   x() {
     return this.data.x;
   }
@@ -76,13 +89,8 @@ class Player {
     this.tiles[name] = tile;
     this.group.add(tile);
   }
-  buildThreeMesh() {
+  init() {
     ['shiny_down_a','shiny_down_b','shiny_down_standing','shiny_left_a','shiny_right_a','shiny_up_a','shiny_up_b','shiny_up_standing'].forEach( (name) => { this.makeTile(name) });
-    this.group.position.x = this.x();
-    this.group.position.y = this.y();
-    this.group.position.z = 1;
-    this.direction('Down');
-    return this.group;
   }
   nextFrame() {
     this.currentTile().position.z = -1;

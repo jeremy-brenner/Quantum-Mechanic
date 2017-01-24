@@ -9,6 +9,7 @@ class Tile {
       'Left': 'Right',
       'Right': 'Left'
     }
+    this.group = new THREE.Group();
   }
   x() {
     return this.data.x;
@@ -34,16 +35,15 @@ class Tile {
 
     return window.game.textures.get(texture_name);
   }
-  buildThreeMesh() {
+  init() {
     var geometry = new THREE.PlaneBufferGeometry( 1, 1, 1, 1 );
     var texture = this.texture();
-
     var material = new THREE.MeshLambertMaterial( { map: texture, transparent: true } );
-    this.mesh = new THREE.Mesh( geometry, material );
-    this.mesh.position.x = this.x();
-    this.mesh.position.y = this.y();
-    this.mesh.position.z = this.z();
-    return this.mesh;
+    var mesh = new THREE.Mesh( geometry, material );
+    this.group.add(mesh);
+    this.group.position.x = this.x();
+    this.group.position.y = this.y();
+    this.group.position.z = this.z();
   }
   solid() {
     if (this.data.type) {

@@ -9,16 +9,20 @@ class Game {
     this.background = new Background(16,9);
     this.asset_loader = new AssetLoader();
     this.title_screen = new TitleScreen();
+    this.player = new Player();
     this.beam = new Beam();
     this.asset_loader.onLoad = this.allAssetsLoaded.bind(this);
     this.asset_loader.onChange = this.assetLoaded.bind(this);
     this.asset_loader.load();
     this.current_map = null;
-    this.player = null;
     this.ready = false;
     this.group = new THREE.Group();
     this.group.position.x = 0.5;
     this.group.position.y = 0.5;
+    this.group.add(this.background.group);
+    this.group.add(this.beam.group);
+    this.group.add(this.title_screen.group);
+    this.group.add(this.player.group);
 
     this.renderer.scene.add(this.group);
     this.gameLoop();
@@ -28,24 +32,12 @@ class Game {
     this.loading_screen.assetLoaded(perc);
   }
 
-  scale() {
-    return 100;
-  }
-
   allAssetsLoaded() {
     this.loading_screen.allAssetsLoaded();
-    var background_group = this.background.buildThreeGroup();
-    this.group.add(background_group);
-    this.group.add( this.beam.group );
-    this.group.add(this.title_screen.group);
+    this.background.init();
+    this.player.init();
     this.title_screen.load();
     this.ready = true;
-  }
-
-  fireBeam(timestamp) {
-    var x = this.player.x();
-    var y = this.player.y();
-    this.beam.fire(this.player.x(),this.player.y(),this.player.direction(),'type',timestamp);
   }
 
   gameLoop(timestamp) {
@@ -54,9 +46,11 @@ class Game {
       var inputs = this.input.getInputs();
 
       if(this.current_map){
+
         this.beam.tick(timestamp);
         this.player.tick(timestamp);
-
+        this.input.tick(timestamp);
+        
         if(inputs.Left) {
           this.player.move('Left');
         }
@@ -70,8 +64,9 @@ class Game {
           this.player.move('Down');
         }
         if(inputs.Action1) {
-          this.fireBeam(timestamp);
+          this.beam.fire(this.player);
         }
+
       }
       if(!this.current_map&&inputs.Action1){
         this.title_screen.hide();
@@ -83,8 +78,8 @@ class Game {
   }
   loadMap(map_name) {
     this.current_map = window.game.maps.get(map_name);
-    var map_group = this.current_map.buildThreeGroup();
-    this.group.add( map_group );
-    this.player = this.current_map.player;
+    this.current_map.init();
+    this.group.add( this.current_map.group );
+    this.player.spawn(this.current_map.spawn_point);
   }
 }

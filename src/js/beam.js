@@ -6,8 +6,11 @@ class Beam {
     this.started = 0;
     this.firing = false;
     this.lasers = [];
+    this.last_tick = 0;
+    this.type = '';
   }
   tick(timestamp) {
+    this.last_tick = timestamp;
     if(this.firing&&timestamp-this.started>this.ttl){
       this.stop();
     }
@@ -19,18 +22,17 @@ class Beam {
     }
     this.firing = false;
   }
-  fire(origin_x,origin_y,original_direction,type,timestamp){
+  fire(player){
     if(this.firing) {
       return;
     }
-    this.started = timestamp;
-    this.type = type;
+    this.started = this.last_tick;
     this.firing = true;
     this.blocked = false;
     this.map = window.game.current_map;
-    this.x = origin_x;
-    this.y = origin_y;
-    this.direction = original_direction;
+    this.x = player.x();
+    this.y = player.y();
+    this.direction = player.direction();
     while(!this.blocked){
       this.shoopDaWoop();
     }
@@ -62,8 +64,9 @@ class Beam {
 
   addLaser(id,x,y) {
     var tile = new Tile({x:x,y:y,z:5,type:`laser-${id}`});
+    tile.init();
     this.lasers.push(tile);
-    this.group.add(tile.buildThreeMesh());
+    this.group.add(tile.group);
   }
 
 }

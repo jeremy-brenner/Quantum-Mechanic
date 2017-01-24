@@ -3,12 +3,14 @@ class Map {
     this.tiles = [];
     this.switches = {};
     this.doors = {};
+    this.group = new THREE.Group();
+    this.initialized = false;
     this.loadData(data);
   }
   loadData(data) {
     this.title = data.title;
+    this.spawn_point = data.spawn_point;
     data.tiles.forEach(this.makeTile.bind(this));
-    this.player = new Player(data.spawn_point.x,data.spawn_point.y);
   }
   makeTile(tile) {
     let tile_obj = new Tile(tile);
@@ -18,6 +20,7 @@ class Map {
       this.doors[tile.door_id] = tile_obj;
     }
     this.tiles.push( tile_obj );
+    this.group.add(tile_obj.group);
   }
   getTile(x,y) {
     var tile = this.tiles.find( (tile) => { return tile.x() == x && tile.y() == y } );
@@ -43,11 +46,11 @@ class Map {
     }
     return this.getTile(new_x,new_y);
   }
-  buildThreeGroup() {
-    this.group = new THREE.Group();
-    this.group.add(this.player.buildThreeMesh())
-    this.tiles.forEach( (tile) => { this.group.add(tile.buildThreeMesh()) } );
-    return this.group;
+  init() {
+    if(!this.initialized){
+      this.tiles.forEach( (tile) => { tile.init() } );
+      this.initialized = true;
+    }
   }
   canMove(x, y) {
     var dest = this.getTile(x, y);

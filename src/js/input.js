@@ -53,21 +53,18 @@ class Input {
   }
 
   getInputs() {
-    if( this.gamePadPresent() ){
-      this.checkGamePads();
-    }
     return this.inputs;
   }
 
-  gamePadPresent() {
-    return this.gamepads.length > 0;
-  }
 
   checkGamePads() {
-    this.gamepads = navigator.getGamepads();
+    var gamepads = navigator.getGamepads();
+    if (!gamepads[0]){
+      return;
+    }
     Object.keys(this.gamepad_bindings).forEach( (key) => {
-      var button = this.gamepads[0].buttons[parseInt(key)];
-      this.inputs[this.gamepad_bindings[key]] = (button) ? button.pressed: false;
+      var button = gamepads[0].buttons[parseInt(key)];
+      this.inputs[gamepad_bindings[key]] = (button) ? button.pressed: false;
     } );
   }
 
@@ -76,5 +73,8 @@ class Input {
   }
   removeGamePad(e) {
     delete this.gamepads[e.gamepad.index];
+  }
+  tick(timestamp) {
+    this.checkGamePads();
   }
 }

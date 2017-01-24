@@ -1,7 +1,6 @@
 class AssetLoader {
   constructor() {
-    this.asset_dir = './app/assets';
-    this.fs = require('electron').remote.require('fs');
+    this.asset_dir = 'assets';
     this.loader_classes = {
       'ogg': AudioLoader,
       'png': TextureLoader,
@@ -9,15 +8,16 @@ class AssetLoader {
     }
     this.loaders = [];
   }
+
   load() {
-    this.readDir(this.asset_dir).forEach(this.loadDir.bind(this));
+    this.readDir(path.join(__dirname, this.asset_dir)).forEach(this.loadDir.bind(this));
     this.loaders.forEach( (loader) => { loader.load() } );
   }
   loadDir(dir) {
     this.readDir(dir).forEach(this.loadFile.bind(this));
   }
   readDir(dir) {
-    return this.fs.readdirSync(dir).filter( (node) => { return !node.match(/^\./) } ).map( (node) => { return dir + '/' + node });
+    return fs.readdirSync(dir).filter( (node) => { return !node.match(/^\./) } ).map( (node) => { return dir + '/' + node });
   }
   loadFile(file) {
     var ext = file.split('.').pop();
