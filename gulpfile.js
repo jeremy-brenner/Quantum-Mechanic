@@ -3,7 +3,7 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var del = require('del');
 var electron = require('electron-packager');
-var foreach = require("gulp-foreach");
+var flatmap = require("gulp-flatmap");
 var zip = require("gulp-zip");
 
 gulp.task('html',function(){
@@ -60,13 +60,12 @@ gulp.task('package',function(cb){
 
 gulp.task("zip", function(){
    return gulp.src("./builds/*")
-       .pipe(foreach(function(stream, file){
-          var fileName = file.path.substr(file.path.lastIndexOf("/")+1);
-          gulp.src("./builds/"+fileName+"/**/*")
-              .pipe(zip(fileName+".zip"))
-              .pipe(gulp.dest("./zipped"));
-          return stream;
-       }));
+     .pipe(flatmap(function(stream, file){
+       var fileName = file.path.substr(file.path.lastIndexOf("/")+1);
+       return gulp.src("./builds/"+fileName+"/**/*")
+           .pipe(zip(fileName+".zip"))
+           .pipe(gulp.dest("./zipped"));
+     }));
 });
 
 gulp.task('clean', gulp.parallel('clean:lib', 'clean:assets', 'clean:builds') );

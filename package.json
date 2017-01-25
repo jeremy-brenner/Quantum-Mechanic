@@ -27,7 +27,7 @@
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
-    "gulp-foreach": "^0.1.0",
+    "gulp-flatmap": "^1.0.0",
     "gulp-zip": "^3.2.0"
   }
 }
