@@ -23,7 +23,6 @@ class Game {
     this.group.add(this.beam.group);
     this.group.add(this.title_screen.group);
     this.group.add(this.player.group);
-
     this.renderer.scene.add(this.group);
     this.gameLoop();
   }
@@ -50,7 +49,7 @@ class Game {
         this.beam.tick(timestamp);
         this.player.tick(timestamp);
         this.input.tick(timestamp);
-        
+
         if(inputs.Left) {
           this.player.move('Left');
         }

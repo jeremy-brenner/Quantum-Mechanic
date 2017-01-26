@@ -40,12 +40,7 @@ class Beam {
   }
   shoopDaWoop() {
     var tile = this.map.getAdjacentTile(this.x,this.y,this.direction);
-    if(tile.boundary) {
-      this.x = tile.x;
-      this.y = tile.y;
-      this.blocked = true;
-      return;
-    }
+
     this.x = tile.x();
     this.y = tile.y();
     if(tile.passes(this.type)){
